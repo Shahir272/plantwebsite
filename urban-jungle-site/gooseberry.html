@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Grow Gooseberries - Fruit Garden Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" style="text-decoration:none">
+            <div class="logo">Fruit Garden Pro.</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#featured">Back to Gallery</a></li>
+        </ul>
+    </nav>
+
+    <header class="guide-header"
+        style="background: linear-gradient(rgba(45, 79, 62, 0.9), rgba(45, 79, 62, 0.8)), url('images/gooseberry.png'); background-size: cover; background-position: center;">
+        <h1>Gooseberry</h1>
+        <p class="subtitle">The Tart Treat</p>
+    </header>
+
+    <div class="guide-container">
+
+        <section class="guide-section">
+            <h2>Planting Steps</h2>
+            <div class="steps-list">
+                <div class="step-card">
+                    <span class="step-number">01</span>
+                    <div class="step-content">
+                        <h3>Site Selection</h3>
+                        <p>Gooseberries prefer cooler spots. Morning sun and afternoon shade is ideal in warmer climates
+                            to prevent leaf scorch.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">02</span>
+                    <div class="step-content">
+                        <h3>Air Circulation</h3>
+                        <p>They are prone to mildew. Plant bushes 5 feet apart to ensure good airflow. Select resistant
+                            varieties like 'Hinnonmakis'.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">03</span>
+                    <div class="step-content">
+                        <h3>Pruning</h3>
+                        <p>Prune in winter to create an open "goblet" shape. This makes harvesting easier (avoiding the
+                            thorns!) and improves fruit size.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <span class="step-number">04</span>
+                    <div class="step-content">
+                        <h3>Harvesting</h3>
+                        <p>Pick green for cooking (pies/jams) in June, or wait until they turn soft and sweet
+                            (red/yellow) in July for eating fresh.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section">
+            <h2>Nutritional Value (per 100g)</h2>
+            <div class="nutrition-grid">
+                <div class="nutri-card">
+                    <span class="nutri-value">44</span>
+                    <span class="nutri-label">Calories</span>
+                </div>
+                <div class="nutri-card">
+                    <span class="nutri-value">4.3g</span>
+                    <span class="nutri-label">Fiber</span>
+                </div>
+                <div class="nutri-card">
+                    <span class="nutri-value">46%</span>
+                    <span class="nutri-label">Vitamin C</span>
+                </div>
+                <div class="nutri-card">
+                    <span class="nutri-value">A</span>
+                    <span class="nutri-label">Vitamin A</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section">
+            <h2>Compare</h2>
+            <div id="comparison-widget"></div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <div class="copyright">
+            &copy; 2024 Fruit Garden Pro.
+        </div>
+    </footer>
+
+    <script src="fruit-data.js"></script>
+    <script>
+        initComparison('gooseberry');
+    </script>
+</body>
+
+</html>
