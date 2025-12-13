@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Perfect Plant - Urban Jungle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .recommendation-hero {
+            background-color: var(--secondary);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .recommendation-hero h1 {
+            color: var(--primary);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: -3rem auto 4rem;
+            background: #fff;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .option-card {
+            background: #f9f9f9;
+            border: 2px solid #eee;
+            padding: 2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .option-card:hover,
+        .option-card.selected {
+            border-color: var(--accent);
+            background: rgba(212, 163, 115, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .option-card h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-container {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .step-btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-next {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-next:hover {
+            background: var(--accent);
+        }
+
+        .btn-prev {
+            background: #eee;
+            color: #555;
+        }
+
+        .btn-prev:hover {
+            background: #ddd;
+        }
+
+        /* Result Section */
+        #result-section {
+            display: none;
+            text-align: center;
+        }
+
+        .result-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            border: 2px solid var(--accent);
+        }
+
+        .result-header {
+            background: var(--primary);
+            color: #fff;
+            padding: 2rem;
+        }
+
+        .result-content {
+            padding: 3rem;
+        }
+
+        .result-content h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .recommendation-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" style="text-decoration:none">
+            <div class="logo">Urban Jungle.</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#featured">Guides</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="recommendation-hero">
+        <h1>Find Your Perfect Plant 🌱</h1>
+        <p>Answer 3 simple questions to get a tailored growing recommendation.</p>
+    </header>
+
+    <div class="form-container">
+        <!-- Step 1: Climate -->
+        <div class="form-step active" id="step-1">
+            <label class="form-label">Where do you live?</label>
+            <div class="options-grid">
+                <div class="option-card" onclick="selectOption('climate', 'tropical', this)">
+                    <h3>Tropical ☀️</h3>
+                    <p>Hot & Humid (Asia, S. America)</p>
+                </div>
+                <div class="option-card" onclick="selectOption('climate', 'temperate', this)">
+                    <h3>Temperate 🍂</h3>
+                    <p>Distinct Seasons (Europe, N. America)</p>
+                </div>
+                <div class="option-card" onclick="selectOption('climate', 'arid', this)">
+                    <h3>Arid / Dry 🌵</h3>
+                    <p>Hot & Dry (Desert, Mediterranean)</p>
+                </div>
+            </div>
+            <div class="btn-container" style="justify-content: flex-end;">
+                <button class="step-btn btn-next" onclick="nextStep(2)">Next Step →</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Goal -->
+        <div class="form-step" id="step-2">
+            <label class="form-label">What is your main goal?</label>
+            <div class="options-grid">
+                <div class="option-card" onclick="selectOption('goal', 'health', this)">
+                    <h3>Healthy Crop 🥗</h3>
+                    <p>High nutrition & vitamins</p>
+                </div>
+                <div class="option-card" onclick="selectOption('goal', 'money', this)">
+                    <h3>Money Maker 💰</h3>
+                    <p>High yield & market value</p>
+                </div>
+                <div class="option-card" onclick="selectOption('goal', 'easy', this)">
+                    <h3>Easy Care 🧘</h3>
+                    <p>Low maintenance & hardy</p>
+                </div>
+            </div>
+            <div class="btn-container">
+                <button class="step-btn btn-prev" onclick="prevStep(1)">← Back</button>
+                <button class="step-btn btn-next" onclick="nextStep(3)">Next Step →</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Water -->
+        <div class="form-step" id="step-3">
+            <label class="form-label">Water Availability?</label>
+            <div class="options-grid">
+                <div class="option-card" onclick="selectOption('water', 'abundant', this)">
+                    <h3>Abundant 💧</h3>
+                    <p>Regular rain or irrigation</p>
+                </div>
+                <div class="option-card" onclick="selectOption('water', 'moderate', this)">
+                    <h3>Moderate 🚿</h3>
+                    <p>Standard garden watering</p>
+                </div>
+                <div class="option-card" onclick="selectOption('water', 'scarce', this)">
+                    <h3>Scarce 🏜️</h3>
+                    <p>Limited water / drought prone</p>
+                </div>
+            </div>
+            <div class="btn-container">
+                <button class="step-btn btn-prev" onclick="prevStep(2)">← Back</button>
+                <button class="step-btn btn-next" onclick="calculateResult()">Get Recommendation ✨</button>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section">
+            <div class="result-card">
+                <div class="result-header">
+                    <h2>Your Perfect Match Is...</h2>
+                    <h1 id="result-name" style="font-size: 3rem; margin:0;">Plant Name</h1>
+                </div>
+                <div class="result-content">
+                    <p id="result-description" class="recommendation-text">
+                        Detailed recommendation text will appear here...
+                    </p>
+                    <a id="result-link" href="#" class="cta-button">Read Full Growing Guide</a>
+                    <br><br>
+                    <button class="step-btn btn-prev" onclick="location.reload()">Start Over</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h4>Urban Jungle.</h4>
+                <p>Cultivating abundance.</p>
+            </div>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let selections = {
+            climate: null,
+            goal: null,
+            water: null
+        };
+
+        function selectOption(category, value, element) {
+            selections[category] = value;
+
+            // Visual selection
+            const stepContainer = element.closest('.form-step');
+            const cards = stepContainer.querySelectorAll('.option-card');
+            cards.forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function nextStep(stepNumber) {
+            // Simple validation could go here
+            const currentStep = stepNumber - 1;
+            // if step 1 -> check climate selection etc.
+
+            document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+            document.getElementById(`step-${stepNumber}`).classList.add('active');
+        }
+
+        function prevStep(stepNumber) {
+            document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+            document.getElementById(`step-${stepNumber}`).classList.add('active');
+        }
+
+        function calculateResult() {
+            const { climate, goal, water } = selections;
+            let plant = {};
+
+            // Default
+            plant = {
+                name: "Lemon Tree",
+                link: "lemon.html",
+                desc: "The Lemon tree is a fantastic all-rounder. Lemons are invaluable in the kitchen, high in Vitamin C, and the trees are evergreen, providing year-round beauty. They can adapt to pots or ground. Given your inputs, a hardy citrus like a Eureka or Meyer Lemon is a safe and rewarding bet that balances care needs with high utility."
+            };
+
+            // Logic Rules
+            if (climate === 'tropical') {
+                if (goal === 'money') {
+                    plant = {
+                        name: "Passion Fruit",
+                        link: "passionfruit.html",
+                        desc: "For a tropical climate with decent water access, Passion Fruit is your ultimate 'Money Maker.' The vine grows vigorously, covering trellises in months, not years, and begins fruiting often within its first seasons. The fruit itself commands a high market price due to its exotic flavor and short shelf life, making local direct-to-consumer sales incredibly profitable. Unlike tree crops which take years to mature, Passion Fruit offers a rapid return on investment. The vines are prolific producers, often yielding hundreds of fruits per season. While they need strong support structures and regular water, the maintenance is manageable. You can also sell value-added products like pulps and juices. In a tropical zone, you can potentially get two harvests a year, maximizing your revenue stream compared to seasonal tree fruits."
+                    };
+                } else if (goal === 'health') {
+                    plant = {
+                        name: "Dragon Fruit",
+                        link: "dragonfruit.html",
+                        desc: "Your tropical haven is perfect for the Dragon Fruit (Pitaya), a nutritional superstar. This cactus produces stunning fruits loaded with antioxidants, Vitamin C, and magnesium, essential for immune health and metabolism. The red-fleshed varieties are particularly high in lycopene. Beyond the fruit, the plant itself improves air quality. It thrives in heat and, being a cactus, handles occasional dry spells better than leafier plants, though it loves regular water for maximum sweetness. Growing this ensures you have a steady supply of a 'superfood' that is often expensive to buy in stores. It's a low-fat, high-fiber crop that supports digestion and heart health, making it the premier choice for a tailored 'Health' garden in the tropics."
+                    };
+                } else { // Easy
+                    plant = {
+                        name: "Dragon Fruit",
+                        link: "dragonfruit.html",
+                        desc: "If you want maximum reward for minimum effort in a tropical climate, Dragon Fruit is the answer. As a cactus, it naturally resists many common pests and diseases that plague broadleaf trees. It doesn't need precise pruning to fruit—just let it climb a sturdy post and marvel at the night-blooming flowers. It tolerates heat waves without wilting. Unlike citrus which needs careful feeding, or stone fruits that need winter chill, Dragon Fruit is 'set and forget' once established on its support. It's robust, forgives irregular watering, and has no complex pollination requirements for self-fertile varieties. It’s the ultimate low-maintenance exotic fruit for a busy gardener."
+                    };
+                }
+            }
+            else if (climate === 'temperate') {
+                if (goal === 'health') {
+                    plant = {
+                        name: "Apple",
+                        link: "apple.html",
+                        desc: "For a health-focused garden in a temperate zone, nothing beats the classic Apple. 'An apple a day' holds truth—they are rich in quercetin, fiber (pectin), and Vitamin C. Growing your own allows you to eat them skin-on without worry of waxes or pesticides, maximizing nutrient intake. They provide a dense, filling snack that regulates blood sugar. While they require patience to establish, a mature apple tree is a legacy health investment, providing bushels of fruit every autumn. They require chill hours which your climate provides perfectly. By choosing disease-resistant varieties, you ensure a clean, chemical-free source of nutrition for your entire family for decades to come."
+                    };
+                } else if (goal === 'easy') {
+                    plant = {
+                        name: "Gooseberry",
+                        link: "gooseberry.html",
+                        desc: "Gooseberries are the unsung heroes of the easy-care temperate garden. These hardy bushes thrive where others struggle, tolerating shade and cooler temperatures with ease. They are practically indestructible once established. You don't need a ladder to harvest, you don't need large space (perfect for small corners), and they are self-fertile. Pests largely ignore them. They resist mildew well if you choose modern varieties. Whether you neglect them for a month or pamper them, they will likely still reward you with buckets of tart, delicious berries perfect for jams and crumbles. For a beginner or busy gardener, they offer the highest success rate of any temperate fruit."
+                    };
+                } else { // Money
+                    plant = {
+                        name: "Mulberry",
+                        link: "mulberry.html",
+                        desc: "Mulberries are a hidden gem for profit in temperate regions. Why? Scarcity. You rarely see them in supermarkets because the ripe berries are too soft to ship. This creates a massive local market opportunity. A single mature tree is a factory, producing an overwhelming abundance of berries. You can sell fresh punnets at farmers markets at a premium, or process the surplus into unique high-value jams, wines, and syrups. They grow fast and fruit young. The 'money making' potential comes from having a product that big chains physically cannot compete with. For a local grower, the Mulberry is a high-volume, niche-market cash crop."
+                    };
+                }
+            }
+            else if (climate === 'arid') {
+                plant = {
+                    name: "Dragon Fruit",
+                    link: "dragonfruit.html",
+                    desc: "In an arid environment, water is your most precious resource, and the Dragon Fruit respects that. Unlike thirsty citrus or avocados that will stress and drop fruit without constant irrigation, this Hylocereus cactus has evolved to store water in its thick stems. It thrives in dry air and intense sun. While it enjoys water, it can survive droughts that would kill other crops. It has a CAM photosynthesis process, opening pores only at night to minimize water loss. This makes it the absolute smartest ecological choice for a dry climate. You get a high-value, exotic fruit crop with a fraction of the water footprint of traditional orchards."
+                };
+            }
+
+            // Render Result
+            document.querySelectorAll('.form-step').forEach(step => step.style.display = 'none');
+            const resultSection = document.getElementById('result-section');
+            resultSection.style.display = 'block';
+
+            document.getElementById('result-name').textContent = plant.name;
+            document.getElementById('result-description').textContent = plant.desc;
+            document.getElementById('result-link').href = plant.link;
+        }
+    </script>
+</body>
+
+</html>
