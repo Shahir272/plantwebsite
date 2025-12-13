@@ -58,9 +58,45 @@ const fruitData = {
         name: "Gooseberry",
         time: "2-3 Years",
         difficulty: "Easy",
-        sun: "Morning Sun",
-        water: "Medium",
+        sun: "Part Shade",
+        water: "Regular",
         type: "Bush"
+    },
+    strawberry: {
+        id: "strawberry",
+        name: "Strawberry",
+        time: "3-4 Months",
+        difficulty: "Easy",
+        sun: "Full Sun",
+        water: "Regular",
+        type: "Ground"
+    },
+    avocado: {
+        id: "avocado",
+        name: "Avocado",
+        time: "3-5 Years",
+        difficulty: "Hard",
+        sun: "Full Sun",
+        water: "Moderate",
+        type: "Tree"
+    },
+    capsicum: {
+        id: "capsicum",
+        name: "Capsicum",
+        time: "60-90 Days",
+        difficulty: "Medium",
+        sun: "Full Sun",
+        water: "Regular",
+        type: "Annual"
+    },
+    pineapple: {
+        id: "pineapple",
+        name: "Pineapple",
+        time: "18-24 Months",
+        difficulty: "Medium",
+        sun: "Full Sun",
+        water: "Low",
+        type: "Bromeliad"
     }
 };
 

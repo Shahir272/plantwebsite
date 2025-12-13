@@ -190,44 +190,41 @@
         <div class="form-step active" id="step-1">
             <label class="form-label">Where do you live?</label>
             <div class="options-grid">
-                <div class="option-card" onclick="selectOption('climate', 'tropical', this)">
+                <div class="option-card" onclick="selectOption('climate', 'tropical', this, 2)">
                     <h3>Tropical ☀️</h3>
                     <p>Hot & Humid (Asia, S. America)</p>
                 </div>
-                <div class="option-card" onclick="selectOption('climate', 'temperate', this)">
+                <div class="option-card" onclick="selectOption('climate', 'temperate', this, 2)">
                     <h3>Temperate 🍂</h3>
                     <p>Distinct Seasons (Europe, N. America)</p>
                 </div>
-                <div class="option-card" onclick="selectOption('climate', 'arid', this)">
+                <div class="option-card" onclick="selectOption('climate', 'arid', this, 2)">
                     <h3>Arid / Dry 🌵</h3>
                     <p>Hot & Dry (Desert, Mediterranean)</p>
                 </div>
             </div>
-            <div class="btn-container" style="justify-content: flex-end;">
-                <button class="step-btn btn-next" onclick="nextStep(2)">Next Step →</button>
-            </div>
+            <!-- Next button removed for auto-advance -->
         </div>
 
         <!-- Step 2: Goal -->
         <div class="form-step" id="step-2">
             <label class="form-label">What is your main goal?</label>
             <div class="options-grid">
-                <div class="option-card" onclick="selectOption('goal', 'health', this)">
+                <div class="option-card" onclick="selectOption('goal', 'health', this, 3)">
                     <h3>Healthy Crop 🥗</h3>
                     <p>High nutrition & vitamins</p>
                 </div>
-                <div class="option-card" onclick="selectOption('goal', 'money', this)">
+                <div class="option-card" onclick="selectOption('goal', 'money', this, 3)">
                     <h3>Money Maker 💰</h3>
                     <p>High yield & market value</p>
                 </div>
-                <div class="option-card" onclick="selectOption('goal', 'easy', this)">
+                <div class="option-card" onclick="selectOption('goal', 'easy', this, 3)">
                     <h3>Easy Care 🧘</h3>
                     <p>Low maintenance & hardy</p>
                 </div>
             </div>
             <div class="btn-container">
                 <button class="step-btn btn-prev" onclick="prevStep(1)">← Back</button>
-                <button class="step-btn btn-next" onclick="nextStep(3)">Next Step →</button>
             </div>
         </div>
 
@@ -235,22 +232,21 @@
         <div class="form-step" id="step-3">
             <label class="form-label">Water Availability?</label>
             <div class="options-grid">
-                <div class="option-card" onclick="selectOption('water', 'abundant', this)">
+                <div class="option-card" onclick="selectOption('water', 'abundant', this, 'result')">
                     <h3>Abundant 💧</h3>
                     <p>Regular rain or irrigation</p>
                 </div>
-                <div class="option-card" onclick="selectOption('water', 'moderate', this)">
+                <div class="option-card" onclick="selectOption('water', 'moderate', this, 'result')">
                     <h3>Moderate 🚿</h3>
                     <p>Standard garden watering</p>
                 </div>
-                <div class="option-card" onclick="selectOption('water', 'scarce', this)">
+                <div class="option-card" onclick="selectOption('water', 'scarce', this, 'result')">
                     <h3>Scarce 🏜️</h3>
                     <p>Limited water / drought prone</p>
                 </div>
             </div>
             <div class="btn-container">
                 <button class="step-btn btn-prev" onclick="prevStep(2)">← Back</button>
-                <button class="step-btn btn-next" onclick="calculateResult()">Get Recommendation ✨</button>
             </div>
         </div>
 
@@ -294,7 +290,7 @@
             water: null
         };
 
-        function selectOption(category, value, element) {
+        function selectOption(category, value, element, nextStepId) {
             selections[category] = value;
 
             // Visual selection
@@ -302,6 +298,15 @@
             const cards = stepContainer.querySelectorAll('.option-card');
             cards.forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
+
+            // Auto-advance with delay for visual feedback
+            setTimeout(() => {
+                if (nextStepId === 'result') {
+                    calculateResult();
+                } else if (nextStepId) {
+                    nextStep(nextStepId);
+                }
+            }, 400);
         }
 
         function nextStep(stepNumber) {

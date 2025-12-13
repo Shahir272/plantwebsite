@@ -5,7 +5,11 @@ const tips = [
     "Lemons stop ripening once picked, so leave them on the tree until fully yellow.",
     "To get good apples, you usually need two different varieties for cross-pollination.",
     "Mulberries drop ripe fruit easily; place a sheet under the tree and shake branches to harvest.",
-    "Gooseberries are one of the few fruits that can tolerate some shade."
+    "Gooseberries are one of the few fruits that can tolerate some shade.",
+    "Strawberries yield best in their second and third years; replant runners for endless berries.",
+    "Avocados don't ripen on the tree; pick them hard and let them soften on the counter.",
+    "Capsicums start green but get sweeter and more nutritious as they turn red or yellow.",
+    "You can grow a pineapple from the top of a store-bought fruit—just be patient for 2 years!"
 ];
 
 const carouselContainer = document.getElementById('carousel-container');
